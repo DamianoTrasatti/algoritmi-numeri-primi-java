@@ -1,0 +1,13 @@
+========================================
+METODO 1
+Intervallo: 3 - 11
+========================================
+Numeri primi:
+3
+5
+7
+11
+Totale numeri primi: 4
+Tempo di calcolo: 0 ms
+
+

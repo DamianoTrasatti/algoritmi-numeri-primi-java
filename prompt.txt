@@ -1,0 +1,300 @@
+sto facendo qusta app in java
+Consegna: 10 ott 2026
+1)Trovare i numeri primi compresi tra due numeri presi in input con il semplice metodo dei divisori fino al numero
+2)Trovare i numeri primi compresi tra due numeri presi in input con il semplice metodo dei divisori fino al numero, uscendo dal ciclo appena possibile
+3)Trovare i numeri primi compresi tra due numeri presi in input con il semplice metodo dei divisori fino al numero/2, 
+uscendo dal ciclo appena possibile
+4)Trovare i numeri primi compresi tra due numeri presi in input con il semplice metodo dei divisori fino al numero/2, 
+usando solo i divisori dispari
+5)Trovare i numeri primi compresi tra due numeri presi in input con il semplice metodo dei divisori fino alla radice quadrata del numero, usando solo i divisori dispari
+uscendo dal ciclo appena possibile
+6)Fermat
+N.B.
+per ognuno dei punti sopra calcolare il tempo per trovare i numeri primi
+P.S.
+I NUMERI PRIMI DEVONO ESSERE SALVATI SU FILE E CON IL RISPETTIVO TEMPO PER CALCOLARLI
+
+ho gia fatto la classe main 
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        Wrapper w = new Wrapper();
+
+        System.out.println("\n\nSe compare la scritta false vuol dire che è andato tutto bene, se scrive true vuol dire che bisogna ripetere l'inserimento");
+
+        int primoNumero, secondoNumero;
+
+        // Ciclo che si ripete finche ci sono errori nel prendere x in input - error riporta true quando ce un errore e quindi quando bisogna ripetere
+        do {
+            System.out.println("\nx (integer): ");
+            int x = w.nextInt();
+            System.out.println("risultato: " + x + " " + "è presente un errore: " + w.error());
+        } while(w.error());
+
+        primoNumero = x;
+
+        do {
+            System.out.println("\nx (integer): ");
+            int y = w.nextInt();
+            System.out.println("risultato: " + x + " " + "è presente un errore: " + w.error());
+        } while(w.error());
+
+        secondoNumero = y;
+
+        // !!!
+        // ###### CONTROLLARE SE IL PRIMO NUMERO 'E PIU' GRANDE DEL SECONDO ######
+        if (primoNumero > secondoNumero) {
+            int temp = primoNumero;
+            primoNumero = secondoNumero;
+            secondoNumero = temp;
+        }
+        // !!!
+
+        // array list per tenere i numeri primi
+        ArrayList<Integer> numeriPrimiEsercizioUno = new ArrayList<>();
+
+        // Ciclo per trovare i numeri primi compresi da primoNumero a secondoNumero
+        int i;
+        // -- questo ciclo passa tutti i numeri dal primo numero al secondo numero
+        for (i=primoNumero; i<=secondoNumero; i++) {
+
+            // ###### CONTROLLI ######
+            // -- i numeri minori o uguali a 1 non sono primi --
+            if (i <= 1) {
+                continue;
+            }
+
+            // ###### variabile booleana per vedere se è primo o no ######
+            boolean isPrimo = true;
+
+            // ###### CONTROLLO SE PRIMI ######
+            // -- questo ciclo passa tutti i numeri da due al numero (non compreso) --
+            int div;
+            for(div=2; div<i; div++) {
+                // -- se la divisione porta 0 di resto allora il numero div è divisore di i e quindi non è primo --
+                if(i%div == 0)
+                    isPrimo = false;
+            }
+
+            if(isPrimo) {
+                numeriPrimiEsercizioUno.add(i);
+            }
+        }
+
+        // !!! scrivere sul file i numeri primi dell'array !!!
+    }
+}
+
+/**
+ *         do {
+            System.out.println("\ny (float): ");
+            float y = w.nextFloat();
+            System.out.println("risultato: " + y + " " + "è presente un errore: " +  w.error());
+        } while(w.error());
+
+        do {
+            System.out.println("\nz (boolean 'true' or 'false'): ");
+            boolean z = w.nextBoolean();
+            System.out.println("risultato: " + z + " " + "è presente un errore: " +  w.error());
+        } while(w.error());
+
+        do {
+            System.out.println("\nyy (double): ");
+            double yy = w.nextDouble();
+            System.out.println("risultato: " + yy + " " + "è presente un errore: " +  w.error());
+        } while(w.error());
+
+        do {
+            System.out.println("\ns (string): ");
+            String s = w.nextString();
+            System.out.println("risultato: " + s + " " + "è presente un errore: " +  w.error());
+            
+        } while(w.error());
+ */
+
+wraper import java.io.*;
+
+public class Wrapper{
+    private BufferedReader reader;
+    private int errorNumber;
+
+    public Wrapper() {
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        errorNumber=-1;
+    }
+
+    public int nextInt() {
+        int x; 
+
+        try {
+            String line = reader.readLine();
+            x = Integer.parseInt(line);
+            errorNumber  = 0;
+        }
+        catch (IOException e) {
+            x=0;
+            errorNumber = 1;
+        }
+        catch (NumberFormatException e) {
+            x=0;
+            errorNumber=2;
+        }
+
+        return x;
+    }
+
+    public float nextFloat() {
+        float y; 
+
+        try {
+            String line = reader.readLine();
+            y = Float.parseFloat(line);
+            errorNumber  = 0;
+        }
+        catch (IOException e) {
+            y=0;
+            errorNumber = 1;
+        }
+        catch (NumberFormatException e) {
+            y=0;
+            errorNumber=2;
+        }
+
+        return y;
+    }
+
+    public boolean nextBoolean() {
+        boolean z; 
+
+        try {
+            String line = reader.readLine();
+            line = line.toLowerCase();
+            if (line.equals("true") || line.equals("false")) {
+                z = Boolean.parseBoolean(line);
+                errorNumber  = 0;
+            } 
+            else {
+                z = false;
+                errorNumber = 2;
+            }
+        }
+        catch (IOException e) {
+            z=false;
+            errorNumber = 1;
+        }
+        catch (NumberFormatException e) {
+            z=false;
+            errorNumber=2;
+        }
+
+        return z;
+    }
+
+    public double nextDouble() {
+        double yy; 
+
+        try {
+            String line = reader.readLine();
+            yy = Double.parseDouble(line);
+            errorNumber  = 0;
+        }
+        catch (IOException e) {
+            yy=0;
+            errorNumber = 1;
+        }
+        catch (NumberFormatException e) {
+            yy=0;
+            errorNumber=2;
+        }
+
+        return yy;
+    }
+
+    public String nextString() {
+        String s; 
+
+        try {
+            s = reader.readLine();
+            errorNumber = 0;
+        }
+        catch (IOException e) {
+            s="";
+            errorNumber = 1;
+        }
+        catch (NumberFormatException e) {
+            s="";
+            errorNumber=2;
+        }
+
+        return s;
+    }
+
+    public boolean error() {
+        return errorNumber==1 || errorNumber==2;
+    }
+}
+
+strategia risolutiva da adottare
+
+classe esercizio questa classe ha come attributi primoNumero e secondoNumero. al suo interno tutti i dati. per vedere il tempo occupato faremo cosi: long startTime = System.currentTimeMillis(); long endTime = System.currentTimeMillis(); long elapsedTime = endTime - startTime; questi non li mettiamo come attributi ma li mettiamo dentro al metodo dell'esercizio e lo avviamo appena entriamo e concludiamo quando finiamo. appena finiamo l'ultima operazione del metodo stoppiamo e poi chiamiamo la funzione per scrivere. 
+funzione1) lo faremo cosi: // array list per tenere i numeri primi
+        ArrayList<Integer> numeriPrimiEsercizioUno = new ArrayList<>();
+
+        // Ciclo per trovare i numeri primi compresi da primoNumero a secondoNumero
+        int i;
+        // -- questo ciclo passa tutti i numeri dal primo numero al secondo numero
+        for (i=primoNumero; i<=secondoNumero; i++) {
+
+            // ###### CONTROLLI ######
+            // -- i numeri minori o uguali a 1 non sono primi --
+            if (i <= 1) {
+                continue;
+            }
+
+            // ###### variabile booleana per vedere se è primo o no ######
+            boolean isPrimo = true;
+
+            // ###### CONTROLLO SE PRIMI ######
+            // -- questo ciclo passa tutti i numeri da due al numero (non compreso) --
+            int div;
+            for(div=2; div<i; div++) {
+                // -- se la divisione porta 0 di resto allora il numero div è divisore di i e quindi non è primo --
+                if(i%div == 0)
+                    isPrimo = false;
+            }
+
+            if(isPrimo) {
+                numeriPrimiEsercizioUno.add(i);
+            }
+        }
+ funzione per scrivere import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ScriviFile {
+    public static void main(String[] args) {
+        String testo = "Ciao, questo è un testo scritto su file in Java.";
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+            writer.write(testo);
+            System.out.println("Scrittura avvenuta con successo!");
+        } catch (IOException e) {
+            System.out.println("Errore durante la scrittura: " + e.getMessage());
+        }
+    }
+}
+
+funzione2) esci dal ciclo appena puoi
+funzione3) fai i divisori fino a numero/2 ed esci appena possibile 
+funzione4) fai come la tre ma dove l'iterazione del ciclo è para metti continue per andare avanti
+funzione5) fai fino alla radice quadrata del numero e fai solo i dispari come ti avevo detto prima esci sempre appena possibile
+il sei nono lo fare
+
+alla fine di ogni esercizio ricordati di scrivere tutto sul file output.txt
+
+ i nomi dei metodi sono metodo1 metodo2 e cosi via
+
+ riscrivi tutto il main e la classe Eserczio
+
+nel main il tutto deve essere messo come menu con i punti 1 2 3 4 5 6 e 0 per chiudere l'app  e chiaramente chiami solo il metodo del punto scelto una volta fatto qullo chiedi se vuole simulare anche per tutti gli altri e in caso che dice si (scrivendo 1) allora fai fare anche tutti gli altri metodi chiamandoli 
