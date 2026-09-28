@@ -110,10 +110,6 @@ public class Main {
                     continua = false;
                     System.out.println("\nApplicazione chiusa.");
                     break;
-
-                default:
-                    System.out.println("\nScelta non valida.");
-                    break;
             }
         }
     }
