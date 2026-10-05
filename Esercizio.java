@@ -1,22 +1,34 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Esercizio {
 
     // ATTRIBUTI: primo e secondo numero sono in ordine crescente sicuramente perche
     // sono stati sistemati nel main
-    private int primoNumero;
-    private int secondoNumero;
+    private BigInteger primoNumero;
+    private BigInteger secondoNumero;
 
     // COSTRUTTORE
-    public Esercizio(int primoNumero, int secondoNumero) {
+    public Esercizio(BigInteger primoNumero, BigInteger secondoNumero) {
         this.primoNumero = primoNumero;
         this.secondoNumero = secondoNumero;
     }
 
-    // ==========================================================
+    // ########################################
+    /* 
+        come funziona compare to a.compareto(b)?
+        restituisce: 
+            -1 se a < b 
+            0 se a = b
+            1 se a > b
+    */
+    // ########################################
+
+    // ########################################
     // METODO 1
     // Divisori fino al numero
-    // ==========================================================
+    // ########################################
     public void metodo1() {
 
         System.out.println("####################");
@@ -24,14 +36,15 @@ public class Esercizio {
         System.out.println("####################");
 
         // ArrayList di numeri interi per tenere i numeri primi
-        ArrayList<Integer> numeriPrimi = new ArrayList<>();
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
 
         // INIZIO CRONOMETRO
         long startTime = System.currentTimeMillis();
 
         // Ciclo che passa tutti i numeri dal primo numero al secondo numero
-        int i;
-        for (i = primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;
+        // per i=primonumero; i<=secondonumero; i++
+        for (i=primoNumero; i.compareTo(secondoNumero)<=0; i.add(BigInteger.ONE)) {
 
             // I numeri <= 1 non sono primi
             if (i <= 1) {
@@ -41,8 +54,8 @@ public class Esercizio {
             boolean isPrimo = true;
 
             // Controlliamo tutti i possibili divisori da 2 fino al numero stesso-1
-            int div;
-            for (div = 2; div < i; div++) {
+            BigInteger div;
+            for (div=2; div<i; div++) {
                 // Se il numero è divisibile (la divisione porta resto 0) allora non è primo
                 if (i % div == 0) {
                     isPrimo = false;
@@ -72,18 +85,18 @@ public class Esercizio {
                 tempoImpiegato);
     }
 
-    // ==========================================================
+    // ########################################
     // METODO 2
     // Divisori fino al numero + uscita appena possibile
-    // ==========================================================
+    // ########################################
     public void metodo2() {
 
         System.out.println("####################");
         System.out.println("METODO 2");
         System.out.println("####################");
 
-        ArrayList<Integer> numeriPrimi = new ArrayList<>();
-
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
+w
         long startTime = System.currentTimeMillis();
 
         int i;
@@ -126,17 +139,17 @@ public class Esercizio {
                 tempoImpiegato);
     }
 
-    // ==========================================================
+    // ########################################
     // METODO 3
     // Divisori fino al numero/2 + uscita appena possibile
-    // ==========================================================
+    // ########################################
     public void metodo3() {
 
         System.out.println("####################");
         System.out.println("METODO 3");
         System.out.println("####################");
 
-        ArrayList<Integer> numeriPrimi = new ArrayList<>();
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
 
         long startTime = System.currentTimeMillis();
 
@@ -181,18 +194,18 @@ public class Esercizio {
                 tempoImpiegato);
     }
 
-    // ==========================================================
+    // ########################################
     // METODO 4
     // Divisori fino al numero/2
     // usando solo divisori dispari
-    // ==========================================================
+    // ########################################
     public void metodo4() {
 
         System.out.println("####################");
         System.out.println("METODO 4");
         System.out.println("####################");
 
-        ArrayList<Integer> numeriPrimi = new ArrayList<>();
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
 
         long startTime = System.currentTimeMillis();
 
@@ -248,24 +261,24 @@ public class Esercizio {
                 tempoImpiegato);
     }
 
-    // ==========================================================
+    // ########################################
     // METODO 5
     // Divisori fino alla radice quadrata
     // usando solo divisori dispari
     // + uscita appena possibile
-    // ==========================================================
+    // ########################################
     public void metodo5() {
 
         System.out.println("####################");
         System.out.println("METODO 5");
         System.out.println("####################");
 
-        ArrayList<Integer> numeriPrimi = new ArrayList<>();
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
 
         long startTime = System.currentTimeMillis();
 
         int i;
-        for (i = primoNumero; i <= secondoNumero; i++) {
+        for (i=primoNumero; i <= secondoNumero; i++) {
 
             if (i <= 1) {
                 continue;
@@ -315,6 +328,62 @@ public class Esercizio {
 
         ScriviFile.scrivi(
                 "METODO 5",
+                primoNumero,
+                secondoNumero,
+                numeriPrimi,
+                tempoImpiegato);
+    }
+
+    // ########################################
+    // METODO 6
+    // Fermat 
+    // ########################################
+    public void metodo6() {
+
+        System.out.println("####################");
+        System.out.println("METODO 6 - FERMAT");
+        System.out.println("####################");
+
+        ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = primoNumero; i <= secondoNumero; i++) {
+
+            // I numeri minori o uguali a 1 non sono primi
+            if (i <= 1) {
+                continue;
+            }
+
+            // I numeri 2 e 3 sono primi
+            if (i == 2 || i == 3) {
+                numeriPrimi.add(i);
+                continue;
+            }
+
+            // Usiamo il Piccolo Teorema di Fermat con base a = 2
+            BigInteger n = BigInteger.valueOf(i);
+            BigInteger base = BigInteger.valueOf(2);
+            BigInteger esponente = n.subtract(BigInteger.ONE); // n - 1
+
+            // Calcola (base^(n-1)) % n in modo efficiente ed evita il crash della memoria
+            BigInteger resto = base.modPow(esponente, n);
+
+            // Se il resto è 1, il numero supera il test di Fermat (probabile primo)
+            if (resto.equals(BigInteger.ONE)) {
+                numeriPrimi.add(i);
+            }
+        }
+
+        long endTime = System.currentTimeMillis();
+
+        long tempoImpiegato = endTime - startTime;
+
+        System.out.println("Numeri primi trovati: " + numeriPrimi.size());
+        System.out.println("Tempo: " + tempoImpiegato + " ms");
+
+        ScriviFile.scrivi(
+                "METODO 6, FERMAT",
                 primoNumero,
                 secondoNumero,
                 numeriPrimi,
