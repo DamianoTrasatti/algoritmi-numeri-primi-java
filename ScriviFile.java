@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.math.BigInteger;
 
 public class ScriviFile {
 
@@ -11,10 +12,11 @@ public class ScriviFile {
 
     public static void scrivi(
             String nomeMetodo,
-            int primoNumero,
-            int secondoNumero,
-            ArrayList<Integer> numeriPrimi,
-            long tempo) {
+            BigInteger primoNumero,
+            BigInteger secondoNumero,
+            ArrayList<BigInteger> numeriPrimi,
+            long tempo
+        ) {
 
         try (
                 BufferedWriter writer =
@@ -28,7 +30,7 @@ public class ScriviFile {
 
             writer.write("Numeri primi:\n");
 
-            for (int numero : numeriPrimi) {
+            for (BigInteger numero : numeriPrimi) {
                 writer.write(numero + "\n");
             }
 
