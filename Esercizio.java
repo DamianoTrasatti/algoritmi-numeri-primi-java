@@ -1,4 +1,3 @@
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -43,11 +42,11 @@ public class Esercizio {
 
         // Ciclo che passa tutti i numeri dal primo numero al secondo numero
         BigInteger i;
-        // per i=primonumero; i<=secondonumero; i++
-        for (i=primoNumero; i.compareTo(secondoNumero)<=0; i.add(BigInteger.ONE)) {
+        // per i = primoNumero; i<=secondonumero; i.add(BigInteger.ONE)
+        for (i = primoNumero; i.compareTo(secondoNumero)<=0; i.add(BigInteger.ONE)) {
 
             // I numeri <= 1 non sono primi
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue; // salta iterazione ( 1 NON T' UN NUMERO PRIMO!! )
             }
 
@@ -55,7 +54,7 @@ public class Esercizio {
 
             // Controlliamo tutti i possibili divisori da 2 fino al numero stesso-1
             BigInteger div;
-            for (div=2; div<i; div++) {
+            for (div.valueOf(2); div.compareTo(i) < 0; div.add(BigInteger.ONE)) {
                 // Se il numero è divisibile (la divisione porta resto 0) allora non è primo
                 if (i % div == 0) {
                     isPrimo = false;
@@ -96,20 +95,20 @@ public class Esercizio {
         System.out.println("####################");
 
         ArrayList<BigInteger> numeriPrimi = new ArrayList<>();
-w
+
         long startTime = System.currentTimeMillis();
 
-        int i;
-        for (i = primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;;
+        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
 
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
             boolean isPrimo = true;
 
-            int div;
-            for (div = 2; div < i; div++) {
+            BigInteger div;
+            for (div.valueOf(2); div.compareTo(i) < 0; div.add(BigInteger.ONE)) {
 
                 if (i % div == 0) {
                     isPrimo = false;
@@ -153,18 +152,18 @@ w
 
         long startTime = System.currentTimeMillis();
 
-        int i;
-        for (i = primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;;
+        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
 
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
             boolean isPrimo = true;
 
             // Controlliamo i divisori fino a numero/2
-            int div;
-            for (div = 2; div <= i / 2; div++) {
+            BigInteger div;
+            for (div.valueOf(2); div.compareTo(i.divide(BigInteger.TWO)) <= 0; div.add(BigInteger.ONE)) {
 
                 if (i % div == 0) {
                     isPrimo = false;
@@ -209,16 +208,16 @@ w
 
         long startTime = System.currentTimeMillis();
 
-        int i;
-        for (i = primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;;
+        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
 
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
             // DEVO TOGLIERE I NUMERI PARI PERCHE' AD ESEMPIO 8 E' DIVISIBILE SOLO PER 2 E PER 4 NON HA DIVISORI DISPARI MANNAGGIA
             // 2 è primo
-            if (i == 2) {
+            if (i.equals(2)) {
                 numeriPrimi.add(i);
                 continue;
             }
@@ -231,8 +230,8 @@ w
             boolean isPrimo = true;
 
             // Salto tutti i divisori pari
-            int div;
-            for (div = 3; div <= i / 2; div += 2) {
+            BigInteger div;
+            for (div.valueOf(3); div.compareTo(i.divide(BigInteger.TWO)) <= 0; div.add(BigInteger.TWO)) {
 
                 if (i % div == 0) {
                     isPrimo = false;
@@ -277,17 +276,17 @@ w
 
         long startTime = System.currentTimeMillis();
 
-        int i;
-        for (i=primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;;
+        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
 
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
             // DEVO TOGLIERE I NUMERI PARI PERCHE' AD ESEMPIO 8 E' DIVISIBILE SOLO PER 2 E
             // PER 4 NON HA DIVISORI DISPARI MANNAGGIA
             // 2 è primo
-            if (i == 2) {
+            if (i.equals(2)) {
                 numeriPrimi.add(i);
                 continue;
             }
@@ -303,8 +302,8 @@ w
             int limite = (int) Math.sqrt(i);
 
             // Salto tutti i divisori pari
-            int div;
-            for (div = 3; div <= limite; div += 2) {
+            BigInteger div;
+            for (div.valueOf(3); div.compareTo(limite) <= 0; div.add(BigInteger.TWO)) {
 
                 if (i % div == 0) {
                     isPrimo = false;
@@ -348,21 +347,22 @@ w
 
         long startTime = System.currentTimeMillis();
 
-        for (int i = primoNumero; i <= secondoNumero; i++) {
+        BigInteger i;
+        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
 
             // I numeri minori o uguali a 1 non sono primi
-            if (i <= 1) {
+            if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
             // I numeri 2 e 3 sono primi
-            if (i == 2 || i == 3) {
+            if (i.equals(2) || i.equals(3)) {
                 numeriPrimi.add(i);
                 continue;
             }
 
             // Usiamo il Piccolo Teorema di Fermat con base a = 2
-            BigInteger n = BigInteger.valueOf(i);
+            BigInteger n = i;
             BigInteger base = BigInteger.valueOf(2);
             BigInteger esponente = n.subtract(BigInteger.ONE); // n - 1
 
@@ -388,5 +388,11 @@ w
                 secondoNumero,
                 numeriPrimi,
                 tempoImpiegato);
+    }
+
+    public BigInteger getMod(BigInteger numero, BigInteger divisore) {
+        BigInteger temp = numero.divide(divisore);
+        BigInteger resto = numero.subtract(temp.multiply(divisore));
+        return resto;
     }
 }
