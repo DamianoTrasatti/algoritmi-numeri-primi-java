@@ -15,13 +15,13 @@ public class Esercizio {
     }
 
     // ########################################
-    /* 
-        come funziona compare to a.compareto(b)?
-        restituisce: 
-            -1 se a < b 
-            0 se a = b
-            1 se a > b
-    */
+    /*
+     * come funziona compare to a.compareto(b)?
+     * restituisce:
+     * -1 se a < b
+     * 0 se a = b
+     * 1 se a > b
+     */
     // ########################################
 
     // ########################################
@@ -40,11 +40,8 @@ public class Esercizio {
         // INIZIO CRONOMETRO
         long startTime = System.currentTimeMillis();
 
-        // Ciclo che passa tutti i numeri dal primo numero al secondo numero
-        BigInteger i;
-        // per i = primoNumero; i<=secondonumero; i.add(BigInteger.ONE)
-        for (i = primoNumero; i.compareTo(secondoNumero)<=0; i.add(BigInteger.ONE)) {
-
+        // per i = primoNumero; i<=secondonumero; i++
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
             // I numeri <= 1 non sono primi
             if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue; // salta iterazione ( 1 NON T' UN NUMERO PRIMO!! )
@@ -53,10 +50,9 @@ public class Esercizio {
             boolean isPrimo = true;
 
             // Controlliamo tutti i possibili divisori da 2 fino al numero stesso-1
-            BigInteger div;
-            for (div.valueOf(2); div.compareTo(i) < 0; div.add(BigInteger.ONE)) {
+            for (BigInteger div = BigInteger.TWO; div.compareTo(i) < 0; div = div.add(BigInteger.ONE)) {
                 // Se il numero è divisibile (la divisione porta resto 0) allora non è primo
-                if (i % div == 0) {
+                if (getMod(i, div).equals(BigInteger.ZERO)) {
                     isPrimo = false;
                 }
             }
@@ -98,8 +94,7 @@ public class Esercizio {
 
         long startTime = System.currentTimeMillis();
 
-        BigInteger i;;
-        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
 
             if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
@@ -107,10 +102,9 @@ public class Esercizio {
 
             boolean isPrimo = true;
 
-            BigInteger div;
-            for (div.valueOf(2); div.compareTo(i) < 0; div.add(BigInteger.ONE)) {
+            for (BigInteger div = BigInteger.TWO; div.compareTo(i) < 0; div = div.add(BigInteger.ONE)) {
 
-                if (i % div == 0) {
+                if (getMod(i, div).equals(BigInteger.ZERO)) {
                     isPrimo = false;
                     // Esco appena trovo un divisore, il ciclo si interrompe. i numeri primi hanno
                     // come divisore uno e se stessi
@@ -152,8 +146,7 @@ public class Esercizio {
 
         long startTime = System.currentTimeMillis();
 
-        BigInteger i;;
-        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
 
             if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
@@ -162,10 +155,10 @@ public class Esercizio {
             boolean isPrimo = true;
 
             // Controlliamo i divisori fino a numero/2
-            BigInteger div;
-            for (div.valueOf(2); div.compareTo(i.divide(BigInteger.TWO)) <= 0; div.add(BigInteger.ONE)) {
+            BigInteger meta = i.divide(BigInteger.TWO);
+            for (BigInteger div = BigInteger.TWO; div.compareTo(meta) <= 0; div = div.add(BigInteger.ONE)) {
 
-                if (i % div == 0) {
+                if (getMod(i, div).equals(BigInteger.ZERO)) {
                     isPrimo = false;
 
                     // Esco appena possibile
@@ -208,32 +201,32 @@ public class Esercizio {
 
         long startTime = System.currentTimeMillis();
 
-        BigInteger i;;
-        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
 
             if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
             }
 
-            // DEVO TOGLIERE I NUMERI PARI PERCHE' AD ESEMPIO 8 E' DIVISIBILE SOLO PER 2 E PER 4 NON HA DIVISORI DISPARI MANNAGGIA
+            // DEVO TOGLIERE I NUMERI PARI PERCHE' AD ESEMPIO 8 E' DIVISIBILE SOLO PER 2 E
+            // PER 4 NON HA DIVISORI DISPARI MANNAGGIA
             // 2 è primo
-            if (i.equals(2)) {
+            if (i.equals(BigInteger.TWO)) {
                 numeriPrimi.add(i);
                 continue;
             }
 
             // I numeri pari maggiori di 2 non sono primi
-            if (i % 2 == 0) {
+            if (getMod(i, BigInteger.TWO).equals(BigInteger.ZERO)) {
                 continue;
             }
 
             boolean isPrimo = true;
 
             // Salto tutti i divisori pari
-            BigInteger div;
-            for (div.valueOf(3); div.compareTo(i.divide(BigInteger.TWO)) <= 0; div.add(BigInteger.TWO)) {
+            for (BigInteger div = BigInteger.valueOf(3); div.compareTo(i.divide(BigInteger.TWO)) <= 0; div = div
+                    .add(BigInteger.TWO)) {
 
-                if (i % div == 0) {
+                if (getMod(i, div).equals(BigInteger.ZERO)) {
                     isPrimo = false;
                     // Non esco appena possibile !!
                     // break;
@@ -276,8 +269,7 @@ public class Esercizio {
 
         long startTime = System.currentTimeMillis();
 
-        BigInteger i;;
-        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
 
             if (i.compareTo(BigInteger.ONE) <= 0) {
                 continue;
@@ -286,26 +278,25 @@ public class Esercizio {
             // DEVO TOGLIERE I NUMERI PARI PERCHE' AD ESEMPIO 8 E' DIVISIBILE SOLO PER 2 E
             // PER 4 NON HA DIVISORI DISPARI MANNAGGIA
             // 2 è primo
-            if (i.equals(2)) {
+            if (i.equals(BigInteger.TWO)) {
                 numeriPrimi.add(i);
                 continue;
             }
 
             // I numeri pari maggiori di 2 non sono primi
-            if (i % 2 == 0) {
+            if (getMod(i, BigInteger.TWO).equals(BigInteger.ZERO)) {
                 continue;
             }
 
             boolean isPrimo = true;
 
             // Calcoliamo la radice quadrata
-            int limite = (int) Math.sqrt(i);
+            BigInteger limite = i.sqrt();
 
             // Salto tutti i divisori pari
-            BigInteger div;
-            for (div.valueOf(3); div.compareTo(limite) <= 0; div.add(BigInteger.TWO)) {
+            for (BigInteger div = BigInteger.valueOf(3); div.compareTo(limite) <= 0; div = div.add(BigInteger.TWO)) {
 
-                if (i % div == 0) {
+                if (getMod(i, div).equals(BigInteger.ZERO)) {
                     isPrimo = false;
 
                     // Esco appena possibile!!
@@ -335,7 +326,7 @@ public class Esercizio {
 
     // ########################################
     // METODO 6
-    // Fermat 
+    // Fermat
     // ########################################
     public void metodo6() {
 
@@ -347,8 +338,7 @@ public class Esercizio {
 
         long startTime = System.currentTimeMillis();
 
-        BigInteger i;
-        for (i = primoNumero; i.compareTo(secondoNumero) <= 0; i.add(BigInteger.ONE)) {
+        for (BigInteger i = primoNumero; i.compareTo(secondoNumero) <= 0; i = i.add(BigInteger.ONE)) {
 
             // I numeri minori o uguali a 1 non sono primi
             if (i.compareTo(BigInteger.ONE) <= 0) {
@@ -356,18 +346,19 @@ public class Esercizio {
             }
 
             // I numeri 2 e 3 sono primi
-            if (i.equals(2) || i.equals(3)) {
+            if (i.equals(BigInteger.TWO) || i.equals(BigInteger.valueOf(3))) {
                 numeriPrimi.add(i);
                 continue;
             }
 
             // Usiamo il Piccolo Teorema di Fermat con base a = 2
             BigInteger n = i;
-            BigInteger base = BigInteger.valueOf(2);
+            BigInteger base = BigInteger.TWO;
             BigInteger esponente = n.subtract(BigInteger.ONE); // n - 1
 
             // Calcola (base^(n-1)) % n in modo efficiente ed evita il crash della memoria
-            BigInteger resto = base.modPow(esponente, n);
+            // BigInteger resto = getMod((getPow(base, esponente)), i);
+            BigInteger resto = getModPow(base, esponente, i);
 
             // Se il resto è 1, il numero supera il test di Fermat (probabile primo)
             if (resto.equals(BigInteger.ONE)) {
@@ -390,9 +381,44 @@ public class Esercizio {
                 tempoImpiegato);
     }
 
+
+    // non gestisce i negativi ma non è un problema perche non possono arrivarci
     public BigInteger getMod(BigInteger numero, BigInteger divisore) {
         BigInteger temp = numero.divide(divisore);
         BigInteger resto = numero.subtract(temp.multiply(divisore));
         return resto;
+    }
+
+    // Cosa fa questa funzione?
+    /**
+    equivalente di fare 2^esp-1 mod esp ma senza far crasciare il programma
+    ad ogni iterazione facciamo mod della base e del risultato (inizialemnte anche, il risultato non serve fare il mod perche è gia 1)
+    */
+
+    public BigInteger getModPow(BigInteger base, BigInteger esponente, BigInteger mod) {
+        BigInteger result = BigInteger.ONE;
+        base = getMod(base, mod); // riduco subito la base cosi non supero mai esponente^2
+
+        // il risultato viene modificato solo se l'epsonente è disparo perche 
+        /*
+         se esp pari = b^2 mod n, esp/2 --> base^esp = (base^esp/2)^2
+         se esp disp = b^2 mod n, esp/2, result=result*base mod n --> base^esp = base * (base^2)^((esp-1)/2)
+        */
+        while (esponente.compareTo(BigInteger.ZERO) > 0) { // finche l'esponente è maggiore di 0
+            if (!getMod(esponente, BigInteger.TWO).equals(BigInteger.ZERO)) { // esponente dispari
+                result = getMod(result.multiply(base), mod);
+            }
+            base = getMod(base.multiply(base), mod); // base = base^2 mod n
+            esponente = esponente.divide(BigInteger.TWO); // esponente = esponente / 2
+        }
+        return result;
+    }
+
+    public void setPrimoNumero (BigInteger primoNumero) {
+        this.primoNumero = primoNumero;
+    }
+
+    public void setSecondoNumero (BigInteger secondoNumero) {
+        this.secondoNumero = secondoNumero;
     }
 }

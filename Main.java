@@ -98,7 +98,7 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println("\nIl metodo di Fermat non è stato implementato.");
+                    esercizio.metodo6();
                     break;
 
                 case 7:
@@ -130,7 +130,9 @@ public class Main {
                     }
 
                     // Aggiorniamo l'oggetto con i nuovi estremi
-                    esercizio = new Esercizio(primoNumero, secondoNumero);
+                    esercizio.setPrimoNumero(primoNumero);
+                    esercizio.setSecondoNumero(secondoNumero);
+                    
                     System.out.println("\nIntervallo aggiornato con successo!");
                     break;
 
